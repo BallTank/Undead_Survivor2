@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,5 +34,14 @@ public class Scanner : MonoBehaviour
         }
 
         return result;
+    }
+
+    // 유니티 에디터에서 스캔 범위 나타낸다
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        // 이 객체를 중심으로 scanRange만큼 원을 그린다.
+        Gizmos.DrawWireSphere(transform.position, scanRange);
+
     }
 }
