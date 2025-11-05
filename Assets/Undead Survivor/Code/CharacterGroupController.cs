@@ -62,7 +62,6 @@ public class CharacterGroupController : MonoBehaviour
 
             button.onClick.AddListener(() =>
             {
-                Debug.Log($"ID: {captureId} 람다 실행");
                 if (gameStartPanel) { gameStartPanel.SetActive(false); }
                 if (hubPanel) { hubPanel.SetActive(true); }
                 if (GameManager.instance) { GameManager.instance.GameStart(captureId); }
@@ -71,8 +70,6 @@ public class CharacterGroupController : MonoBehaviour
 
             // 인스펙터에 등록된 리스너 개수를 센다
             int persistentCount = button.onClick.GetPersistentEventCount();
-            Debug.LogWarning($"리스너 등록 확인: '{button.gameObject.name}' " +
-                $"| 인스펙터 개수: {persistentCount}");
         }
     }
 }
