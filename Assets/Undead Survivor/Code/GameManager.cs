@@ -71,14 +71,14 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOverRoutine()
     {
         isLive = false;
-        
+
         yield return new WaitForSeconds(0.5f);
 
         uiResult.gameObject.SetActive(true);
         uiResult.Lose();
         Stop();
 
-        AudioManager.instance.PlayBgm(false); 
+        AudioManager.instance.PlayBgm(false);
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
     }
 
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 
         gameTime += Time.deltaTime;
 
-        if(gameTime > maxGameTime)
+        if (gameTime > maxGameTime)
         {
             gameTime = maxGameTime;
             GameVictory();
@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
         }
         exp++;
 
-        if(exp == nextExp[Mathf.Min(level,nextExp.Length-1)])
+        if (exp == nextExp[Mathf.Min(level, nextExp.Length - 1)])
         {
             level++;
             exp = 0;
