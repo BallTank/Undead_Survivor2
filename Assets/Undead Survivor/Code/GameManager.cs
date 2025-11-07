@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -11,7 +13,7 @@ public class GameManager : MonoBehaviour
     public float maxGameTime;
 
     [Header("# Player Info")]
-    public int playerId;
+    public characterType characterId;
     public float health;
     public float maxHealth;
     public int level;
@@ -40,11 +42,21 @@ public class GameManager : MonoBehaviour
     // 캐릭터 버튼에 Onclick
     public void GameStart(int id)
     {
-        playerId = id;
-        health = maxHealth;
+        // id가 characterType에 정의된 값인지 확인
+        if(System.Enum.IsDefined(typeof(characterType), id))
+        {
+            characterId = (characterType)id;
+        }
+        else
+        {
+            Debug.LogError($"잘못된 캐릭터ID: {id} 기본값, Boy로 설정한다.");
+            characterId = characterType.Boy;
+        }
+
+            health = maxHealth;
 
         player.gameObject.SetActive(true);
-        uiLevelUp.Select(playerId % 2);
+        uiLevelUp.Select(id % 2);
         Resume();
 
         AudioManager.instance.PlayBgm(true);
