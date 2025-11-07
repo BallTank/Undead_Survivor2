@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
         instance = this;
         maxGameTime = 5 * 60f;
         maxHealth = 100;
-        nextExp = new int[] { 3, 19, 28, 45, 51, 67, 72, 84, 190, 299 };
+        //nextExp = new int[] { 3, 19, 28, 45, 51, 67, 72, 84, 190, 299 };
+        nextExp = new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         Application.targetFrameRate = 60;
     }
 
