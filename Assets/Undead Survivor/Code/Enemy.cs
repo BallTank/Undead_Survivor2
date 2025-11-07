@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
         Vector2 dirVec = target.position - rigid.position;
         Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
-        //rigid.velocity = Vector2.zero;
+        //rigid.velocity = Vector2.zero;    // 넉백과 충돌하는 코드. 삭제한다.
     }
 
     private void LateUpdate()
@@ -102,7 +102,6 @@ public class Enemy : MonoBehaviour
 
     public void Dead()
     {
-        Debug.Log($"{transform.name}: dead");
         // 풀매니저의 Return메서드를 호출
         poolManager.Return(PoolType.Enemy, gameObject);
     }

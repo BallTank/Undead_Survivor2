@@ -9,7 +9,6 @@ public class ItemData : ScriptableObject
     [Header("# Main Info")]
     public ItemType itemType;
     //public int itemId;
-    public PoolType poolType;
     public string itemName;
     [TextArea]
     public string itemDesc;
@@ -19,11 +18,11 @@ public class ItemData : ScriptableObject
     public float baseDamage;
     public int baseCount;
     public float[] damages;
+    public int maxLevel => damages.Length;
     public int[] counts;
 
     [Header("# Weapon")]
     public GameObject projectile;
     public Sprite hand;
 
-    
 }
