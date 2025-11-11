@@ -18,9 +18,6 @@ public class PoolManager : MonoBehaviour
 {
     public List<PoolSetting> poolSettings;
 
-    //public GameObject[] prefabs;
-
-    //private Queue<GameObject>[] pools;
     // PoolType을 키로 사용해서 Queue를 찾는다.
     private Dictionary<PoolType, Queue<GameObject>> poolDictionary;
 
@@ -66,8 +63,8 @@ public class PoolManager : MonoBehaviour
         select.SetActive(true);
         return select;
     }
-    // Return 메서드도 PoolType을 받는다.
-    public void Return(PoolType type, GameObject target)
+    // Retrieve 메서드도 PoolType을 받는다.
+    public void Retrieve(PoolType type, GameObject target)
     {
         if (!poolDictionary.ContainsKey(type))
         {
