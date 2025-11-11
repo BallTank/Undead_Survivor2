@@ -1,11 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    //public int id;
-    public ItemData.ItemType itemType;  // ¾ÆÀÌÅÛÅ¸ÀÔ
+    public ItemData.ItemType itemType;  // ì•„ì´í…œíƒ€ì…
     public float damage;
     public int amount;
     public int instanceCount;
@@ -53,7 +52,8 @@ public class Weapon : MonoBehaviour
             UpdateMeleeWeapon();
         }
 
-        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+        //player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+        player.TriggerApplyGear();
     }
 
     public void Init(ItemData data)
@@ -64,7 +64,6 @@ public class Weapon : MonoBehaviour
         transform.localPosition = Vector3.zero;
 
         // Property Set
-        //id = data.itemId;
         this.itemType = data.itemType;
         damage = data.baseDamage * Character.Damage;
         amount = data.baseCount + Character.Amount;
@@ -87,7 +86,8 @@ public class Weapon : MonoBehaviour
         hand.spriter.sprite = data.hand;
         hand.gameObject.SetActive(true);
 
-        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+        //player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+        player.TriggerApplyGear();
     }
 
     void UpdateMeleeWeapon()

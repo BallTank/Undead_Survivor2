@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,13 @@ public class Player : MonoBehaviour
     SpriteRenderer spriter;
     Rigidbody2D rigid;
     Animator anim;
+
+    public event Action OnApplyGear;
+
+    public void TriggerApplyGear()
+    {
+        OnApplyGear?.Invoke();
+    }
 
     private void Awake()
     {

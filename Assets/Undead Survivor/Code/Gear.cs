@@ -7,17 +7,31 @@ public class Gear : MonoBehaviour
     public ItemData.ItemType type;
     public float rate;
 
+    private Player player;
+
     public void Init(ItemData data)
     {
         // Basic Set
         name = "Gear " + data.itemType;
-        transform.parent = GameManager.instance.player.transform;
+        player = GameManager.instance.player;
+        transform.parent = player.transform;
         transform.localPosition = Vector3.zero;
 
         // Property Set
         type = data.itemType;
         rate = data.damages[0];
+
+        player.OnApplyGear += ApplyGear;
+
         ApplyGear();
+    }
+
+    private void OnDestroy()
+    {
+        if(player != null)
+        {
+            player.OnApplyGear -= ApplyGear;
+        }
     }
 
     public void LevelUp(float rate)
