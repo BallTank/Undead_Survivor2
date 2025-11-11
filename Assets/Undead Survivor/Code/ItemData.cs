@@ -19,11 +19,10 @@ public class ItemData : ScriptableObject
     public float baseDamage;
     public int baseCount;
     public float[] damages;
+    public int maxLevel => damages.Length;
     public int[] counts;
 
     [Header("# Weapon")]
     public GameObject projectile;
     public Sprite hand;
-
-    
 }

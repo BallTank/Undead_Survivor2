@@ -6,11 +6,18 @@ public class LevelUp : MonoBehaviour
 {
     RectTransform rect;
     Item[] items;
-
+    List<Item> consumableItems = new List<Item>();
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
         items = GetComponentsInChildren<Item>(true);
+        foreach (Item item in items)
+        {
+            if(item.data.itemType == ItemData.ItemType.Heal)
+            {
+                consumableItems.Add(item);
+            }
+        }
     }
 
     public void Show()
@@ -64,14 +71,14 @@ public class LevelUp : MonoBehaviour
         for(int index=0; index < ran.Length; index++)
         {
             //Item ranItem = ran[index]; // 왜 이게 아니지?
-            //ran[index]는 item리스트의 인덱스를 담고 있습니다. 타입이 안맞습니다.
+            //ran[index]는 item리스트의 인덱스를 담고 있습니다. 또한 타입이 안맞습니다.
             Item ranItem = items[ran[index]];
-            int maxLevel = ranItem.data.damages.Length;
+            int maxLevel = ranItem.data.maxLevel;
 
             // 맥스레벨이면, 아이템을 소비아이템으로 바꾸기
-            if (ranItem.level == maxLevel)
+            if (ranItem.level == maxLevel && ranItem.data.itemType != ItemData.ItemType.Heal)
             {
-                items[Random.Range(4, items.Length)].gameObject.SetActive(true);
+                consumableItems[Random.Range(0, consumableItems.Count)].gameObject.SetActive(true);               
             }
             else
             {
