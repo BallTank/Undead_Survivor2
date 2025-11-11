@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
         {
             rigid.velocity = Vector2.zero;
             //gameObject.SetActive(false);
-            poolManager.Return(PoolType.Bullet, gameObject);
+            poolManager.Retrieve(PoolType.Bullet, gameObject);
         }
     }
 
@@ -54,6 +54,6 @@ public class Bullet : MonoBehaviour
             return;
 
         gameObject.SetActive(false);
-        poolManager.Return(PoolType.Bullet, gameObject);
+        poolManager.Retrieve(PoolType.Bullet, gameObject);
     }
 }
