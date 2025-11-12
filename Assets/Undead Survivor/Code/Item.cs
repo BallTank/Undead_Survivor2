@@ -16,14 +16,22 @@ public class Item : MonoBehaviour
     [SerializeField] private Text textName;
     [SerializeField] private Text textDesc;
 
+    private LevelUp levelUp;
     private Button button;
 
     private void Awake()
     {
+        levelUp = GetComponentInParent<LevelUp>();
+
         icon.sprite = data.itemIcon;
         textName.text = data.itemName;
         button = GetComponent<Button>();
-        button.onClick.AddListener(OnClick);
+        button.onClick.AddListener(() =>
+        {
+            OnClick();
+            levelUp.Hide();
+        }
+            );
     }
 
     private void OnEnable()
