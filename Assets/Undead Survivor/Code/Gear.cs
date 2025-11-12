@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Gear : MonoBehaviour
 {
-    public ItemData.ItemType type;
-    public float rate;
+    private ItemData.ItemType type;
+    private float rate;
+
+    private float baseRotationSpeed = 150f;
+    private float baseBulletSpeed = 75f;
 
     private Player player;
 
@@ -20,6 +23,9 @@ public class Gear : MonoBehaviour
         // Property Set
         type = data.itemType;
         rate = data.damages[0];
+        // fix later
+        //baseRotationSpeed = data.baseRotationSpeed;
+        //baseBulletSpeed = data.baseBulletSpeed;
 
         player.OnApplyGear += ApplyGear;
 
@@ -61,13 +67,11 @@ public class Gear : MonoBehaviour
         {
             switch (weapon.itemType)
             {
-                case 0:
-                    float speed = 150 * Character.rotationSpeed;
-                    weapon.speed = 150 + (speed * rate);
+                case ItemData.ItemType.Melee:
+                    weapon.speed = baseRotationSpeed * (1 + rate) * Character.rotationSpeed;
                     break;
-                default:
-                    speed = .5f * Character.fireCooldown;
-                    weapon.speed = speed * (1f-rate);
+                case ItemData.ItemType.Range:                    
+                    weapon.speed = baseBulletSpeed * (1f-rate) * Character.fireCooldown;
                     break;
             }
         }
@@ -75,7 +79,7 @@ public class Gear : MonoBehaviour
 
     void SpeedUp()
     {
-        float speed = 3f * Character.Speed;
-        GameManager.instance.player.speed = speed + (speed * rate);
+        player = GameManager.instance.player;
+        player.speed = player.speed * (1 + rate) * Character.Speed;
     }
 }
