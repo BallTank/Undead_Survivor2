@@ -46,8 +46,8 @@ public class CharacterGroupController : MonoBehaviour
                 Debug.LogWarning($"숫자가 없는 버튼: {button.gameObject.name}");
                 continue;
             }
-            // C# for, foreach 람다 버그 예방용
-            int characterId;
+            
+            int characterId = 0;
             try
             {
                 // 문자열(match.value)을 정수로 전환합니다.
@@ -58,6 +58,7 @@ public class CharacterGroupController : MonoBehaviour
                 Debug.LogError($"{button.gameObject.name} ID 파싱 중 오류: {e.Message}");
                 continue;
             }
+            // 루프를 돌며 일어나는 값 참조가 안되는 버그 예방용
             int captureId = characterId;
 
             button.onClick.AddListener(() =>
@@ -67,9 +68,6 @@ public class CharacterGroupController : MonoBehaviour
                 if (GameManager.instance) { GameManager.instance.GameStart(captureId); }
                 else { Debug.LogError("GameManger 싱글턴 확인하세요"); }
             });
-
-            // 인스펙터에 등록된 리스너 개수를 센다
-            int persistentCount = button.onClick.GetPersistentEventCount();
         }
     }
 }
